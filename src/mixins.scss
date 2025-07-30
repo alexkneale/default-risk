@@ -1,0 +1,40 @@
+// flexbox mixin
+@mixin flexbox($direction: row, $justify: flex-start, $align: stretch) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin button-base($bg: #111, $color: white, $padding, $border-radius) {
+    display: inline-flex; //
+    align-items: center; //
+    //gap margin-top max-height width
+    // width
+    padding: $padding; // different values
+    background-color: $bg; //
+    color: $color; //
+    text-decoration: none;
+    border: none;
+    border-radius: $border-radius; // different values
+    font-size: 0.9rem; // not in both
+    cursor: pointer; //
+    transition: all 0.2s ease; //
+    width: fit-content;
+}
+
+@mixin invert-hover(
+    $bg-hover: white,
+    $text-hover: black,
+    $border-color: black
+) {
+    &:hover {
+        background-color: $bg-hover;
+        color: $text-hover;
+        border: 2px solid $border-color;
+
+        svg {
+            fill: $text-hover;
+        }
+    }
+}

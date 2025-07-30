@@ -1,0 +1,404 @@
+// about me desktop
+// clean up repetition with mixins
+// overflow for smaller screens
+
+// NOTE --> default is mobile version
+@use "devices";
+@use "mixins";
+
+// settings for typing animation
+// simulates blinking text cursor
+@keyframes blink {
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+    25%,
+    75% {
+        opacity: 0;
+    }
+}
+
+// universally reset box sizing
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    // font
+    font-family: "Poppins", sans-serif;
+    // avoiding potential overflow
+    width: 100vw;
+    height: 100vh;
+
+    overflow-x: hidden;
+
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    justify-content: center;
+}
+//do NOT display name on top left for mobile version (only desktop)
+.navbar__sitename {
+    display: none;
+}
+
+.navbar__content {
+    // nav with white background, covering whole of top
+    background-color: white;
+    width: 100%;
+}
+
+.navbar__list {
+    // no bullet points etc
+    list-style: none;
+    // create flexbox across whole row
+
+    @include mixins.flexbox(row, space-evenly, stretch);
+
+    width: 100%;
+
+    // padding, spacing etc
+    padding: 1rem 0.5rem;
+    top: 0;
+    left: 0;
+}
+
+.navbar__button {
+    //don't allow text to wrap, as this looks ugly
+    white-space: nowrap;
+
+    // set font size to small, to avoid potential overflow
+    font-size: small;
+    text-decoration: none;
+    color: black;
+
+    // settings when hovering
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    // padding, spacing etc
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 1rem 0.25rem;
+    border-radius: 8px;
+
+    // invert colours when hovering
+    &:hover {
+        background-color: black;
+        color: white;
+    }
+}
+
+// main header
+.hdr {
+    padding: 1rem;
+
+    // flex container, row direction
+    &__content {
+        //flexbox
+        @include mixins.flexbox(row, center, center);
+    }
+    //profile
+    &__img {
+        display: none;
+    }
+
+    // settings for typing animation
+    // simulates blinking text cursor
+    &__writing--small::after {
+        content: "|";
+        animation: blink 1s infinite;
+        margin-left: 2px;
+        color: #444;
+    }
+}
+
+//padding in main
+main {
+    padding: 1rem;
+}
+// about section
+.about {
+    // center section title
+    &__title {
+        &--mobile {
+            text-align: center;
+        }
+        &--desktop {
+            display: none;
+        }
+    }
+    // container settings
+    &__content {
+        // paragraph and profile photo settings
+        &--paragraph {
+            text-align: center;
+        }
+
+        &--img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50vw;
+        }
+    }
+}
+
+// about section
+.algorithm {
+    // center section title
+    &__title {
+        &--mobile {
+            text-align: center;
+        }
+        &--desktop {
+            display: none;
+        }
+    }
+    // container settings
+    &__content {
+        // paragraph and profile photo settings
+        &--paragraph {
+            text-align: center;
+        }
+
+        &--img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50vw;
+        }
+    }
+}
+
+// footer settings
+.contact {
+    color: white;
+    background: #111;
+    text-align: center;
+
+    // flex container, row direction, for links
+    &__list {
+        list-style: none;
+        @include mixins.flexbox(row, space-evenly, center);
+
+        padding: 1rem;
+    }
+    //logo buttons
+    &__btn {
+        @include mixins.button-base(#111, white, 1rem, 15%);
+
+        align-items: center;
+
+        &--1 {
+            border-radius: 50%;
+        }
+        svg {
+            fill: white;
+        }
+
+        // invert colours when hovering
+        @include mixins.invert-hover();
+    }
+
+    &__email {
+        padding-bottom: 2rem;
+    }
+}
+
+@media screen and (min-width: devices.$desktop) {
+    .navbar {
+        // have navigation bar on right side, and name on left side, for desktop mdoe
+
+        // flexbox
+        @include mixins.flexbox(row, space-between, center);
+
+        padding: 1rem;
+        background-color: white;
+        width: 100%;
+        padding-bottom: 3rem;
+
+        // let site name appear on far right for desktop mode
+        &__sitename {
+            display: block;
+            color: black;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        // nav bar on right, with more spacing
+        &__content {
+            width: auto;
+
+            ul {
+                //flexbox
+                @include mixins.flexbox();
+
+                list-style: none;
+                gap: 1rem; // space between nav items
+                padding: 0;
+                margin: 0;
+
+                li a {
+                    font-size: small;
+                    text-decoration: none;
+                    color: black;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    padding: 1rem 1rem;
+                    border-radius: 8px;
+
+                    &:hover {
+                        background-color: black;
+                        color: white;
+                        border: 2px solid white;
+                    }
+                }
+            }
+        }
+    }
+
+    .hdr__content {
+        // allow more space for desktop mode
+        gap: 2rem;
+        justify-content: center;
+        // let image appear for desktop mode
+        img {
+            display: block;
+            width: 30vw;
+            height: auto;
+        }
+    }
+
+    .about {
+        //
+        // center section title
+        &__title {
+            &--mobile {
+                display: none;
+            }
+            &--desktop {
+                display: inline;
+                //padding-bottom: 5rem;
+                //text-align: left;
+            }
+        }
+        &__content {
+            // place image on left, and text on left, for desktop mode
+            @include mixins.flexbox(row, space-between, center);
+
+            gap: 5rem; // space between image and paragraph
+            margin: 0 auto;
+            padding: 3rem 1rem;
+
+            // less wide image for desktop mode
+            &--img {
+                width: 40vw;
+                max-width: 400px;
+                height: auto;
+                border-radius: 4px;
+            }
+
+            // wider paragraph
+
+            &--paragraph {
+                width: 90%;
+                //font-size: clamp(1rem, 2vw + 0.05rem, 1.3rem);
+                //font-size: 1rem;
+                line-height: 1.5;
+                text-align: left;
+                padding-top: 2rem;
+            }
+        }
+    }
+
+    .algorithm {
+        //
+        // center section title
+        &__title {
+            &--mobile {
+                display: none;
+            }
+            &--desktop {
+                display: inline;
+                //padding-bottom: 5rem;
+                //text-align: left;
+            }
+        }
+        &__content {
+            // place image on left, and text on left, for desktop mode
+            @include mixins.flexbox(row, space-between, center);
+
+            gap: 5rem; // space between image and paragraph
+            margin: 0 auto;
+            padding: 3rem 1rem;
+
+            // less wide image for desktop mode
+            &--img {
+                width: 40vw;
+                max-width: 400px;
+                height: auto;
+                border-radius: 4px;
+            }
+
+            // wider paragraph
+
+            &--paragraph {
+                width: 90%;
+                //font-size: clamp(1rem, 2vw + 0.05rem, 1.3rem);
+                //font-size: 1rem;
+                line-height: 1.5;
+                text-align: left;
+                padding-top: 2rem;
+            }
+        }
+    }
+}
+
+// had to change some padding and settings, as there were some minor issues for very small screens
+
+@media screen and (max-width: devices.$small) and (min-width: devices.$xsmall) {
+    .navbar__button {
+        padding: 0.5rem 0.5rem;
+        font-size: 0.5rem;
+    }
+
+    .about__content--img {
+        width: 60vw;
+    }
+    .algorithm__content--img {
+        width: 60vw;
+    }
+}
+
+@media screen and (max-width: devices.$xsmall) {
+    .navbar {
+        padding: none;
+
+        &__button {
+            padding: 0.2rem;
+            font-size: 0.5rem;
+        }
+    }
+
+    .about__content--img {
+        width: 60vw;
+    }
+    .algorithm__content--img {
+        width: 60vw;
+    }
+
+    .contact__btn {
+        gap: 0.1em;
+        .button {
+            padding: 0.5em;
+        }
+    }
+}
