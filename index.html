@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Alex Kneale</title>
+        <title>Bank of Tomorrow</title>
         <link
             href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
             rel="stylesheet"
@@ -144,199 +144,215 @@
                 </div>
             </section>
 
-            <section class="form">
-                <!-- //// property questions 
-                    // - What is the value of property? (towards cltv)
-                    // - how many units is it (cnt_units)
-                    // - what is the type of property? (prop_type)
-                    // - is the property in an urban area? (metro)
-                    // - What is total value of mortgages you already have (USD) (towards cltv)
+            <form id="mortgage-form">
+                <section class="form">
+                    <!-- //// property questions 
+                      // - What is the value of property? (towards cltv)
+                      // - how many units is it (cnt_units)
+                      // - what is the type of property? (prop_type)
+                      // - is the property in an urban area? (metro)
+                      // - What is total value of mortgages you already have (USD) (towards cltv)
 
-                    
-                    //// personal questions
-                    // are you getting the mortgage by yourself or with other people?  (cnt_borr)
-                    // what is your (or combined, if with other people) credit score (fico)
-                    // have you (or any of you) previously bought property, or is this your first? (flag_fthb)
-                    // what is the main purpose of the property? (occpy_sts)
-                    // what is your (combined) monthly income? (towards dti)
-                    // what are your (combined) current monthly debt payments? (towards dti)
+                      
+                      //// personal questions
+                      // are you getting the mortgage by yourself or with other people?  (cnt_borr)
+                      // what is your (or combined, if with other people) credit score (fico)
+                      // have you (or any of you) previously bought property, or is this your first? (flag_fthb)
+                      // what is the main purpose of the property? (occpy_sts)
+                      // what is your (combined) monthly income? (towards dti)
+                      // what are your (combined) current monthly debt payments? (towards dti)
 
-                    //// loan questions
-                    // What best describes your reason
-                    for requesting a mortgage (loan_purpose, new mortgage or not) 
-                    // then if old mortgage, these extra questions 
-                    // how much money do you want (towards cltv)
-                    // desired interest rate (int_rt)
-                    // desired length of loan (orig_loan_term)
-                    // how much mortgage insurance would you get? If none, input 0 (mi_pct) -->
+                      //// loan questions
+                      // What best describes your reason
+                      for requesting a mortgage (loan_purpose, new mortgage or not) 
+                      // then if old mortgage, these extra questions 
+                      // how much money do you want (towards cltv)
+                      // desired interest rate (int_rt)
+                      // desired length of loan (orig_loan_term)
+                      // how much mortgage insurance would you get? If none, input 0 (mi_pct) -->
 
-                <h2>Mortgage Request Form</h2>
-                <div class="form__container form__container--property">
-                    <h3 class="form__title form__title--property">
-                        Property Questions
-                    </h3>
-                    <div class="form__question form__question--prop-value">
-                        <label for="prop_value">Property Value (USD)</label>
-                        <input type="text" name="prop_value" /><br /><br />
+                    <h2>Mortgage Request Form</h2>
+                    <h5>
+                        NB, we only work with first mortgages or refinance
+                        mortgages.
+                    </h5>
+                    <div class="form__container form__container--property">
+                        <h3 class="form__title form__title--property">
+                            Property Questions
+                        </h3>
+                        <div class="form__question form__question--prop-value">
+                            <label for="prop_value">Property Value (USD)</label>
+                            <input type="text" name="prop_value" /><br /><br />
+                        </div>
+                        <div class="form__question form__question--units">
+                            <label for="units"
+                                >Number of Units of Property</label
+                            >
+                            <select name="units">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4+</option>
+                            </select>
+                        </div>
+                        <div class="form_question form_question--proptype">
+                            <label for="prop_type">Property Type</label>
+
+                            <select name="prop_type">
+                                <option value="SF">Single-Family Home</option>
+                                <option value="CO">Condominium</option>
+                                <option value="PU">
+                                    Planned Unit Development (PUD)
+                                </option>
+                                <option value="MH">Manufactured Home</option>
+                            </select>
+                        </div>
+                        <div class="form__question form__question--metro">
+                            <label for="metro">In an urban area</label>
+
+                            <select name="metro">
+                                <option value="True">Yes</option>
+                                <option value="False">No</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="form__question form__question--units">
-                        <label for="units">Number of Units of Property</label>
-                        <select name="units">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4+</option>
-                        </select>
-                    </div>
-                    <div class="form_question form_question--proptype">
-                        <label for="prop_type">Property Type</label>
+                    <div class="form__container form__container--personal">
+                        <h3 class="form__title form__title--personal">
+                            Personal Questions
+                        </h3>
+                        <div class="form_question form_question--proptype">
+                            <label for="people-responsible"
+                                >Number of people who will be responsible for
+                                mortgage</label
+                            >
 
-                        <select name="prop_type">
-                            <option value="SF">Single-Family Home</option>
-                            <option value="CO">Condominium</option>
-                            <option value="PU">
-                                Planned Unit Development (PUD)
-                            </option>
-                            <option value="MH">Manufactured Home</option>
-                        </select>
-                    </div>
-                    <div class="form__question form__question--metro">
-                        <label for="metro">In an urban area</label>
-
-                        <select name="metro">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form__container form__container--personal">
-                    <h3 class="form__title form__title--personal">
-                        Personal Questions
-                    </h3>
-                    <div class="form_question form_question--proptype">
-                        <label for="people-responsible"
-                            >Number of people who will be responsible for
-                            mortgage</label
+                            <select name="people-responsible">
+                                <option value="1">1</option>
+                                <option value="2">More than 1</option>
+                            </select>
+                        </div>
+                        <div
+                            class="form__question form__question--credit-score"
                         >
+                            <label for="credit-score">Credit Score</label>
+                            <input
+                                type="text"
+                                name="credit-score"
+                            /><br /><br />
+                        </div>
 
-                        <select name="people-responsible">
-                            <option value="1">1</option>
-                            <option value="2">More than 1</option>
-                        </select>
-                    </div>
-                    <div class="form__question form__question--credit-score">
-                        <label for="credit-score">Credit Score</label>
-                        <input type="text" name="credit-score" /><br /><br />
-                    </div>
-
-                    <div class="form_question form_question--first-property">
-                        <label for="first-property"
-                            >Ever bought a property before?</label
+                        <div
+                            class="form_question form_question--first-property"
                         >
+                            <label for="first-property"
+                                >Ever bought a property before?</label
+                            >
 
-                        <select name="first-property">
-                            <option value="No">Yes</option>
-                            <option value="Yes">No</option>
-                        </select>
-                    </div>
+                            <select name="first-property">
+                                <option value="N">Yes</option>
+                                <option value="Y">No</option>
+                            </select>
+                        </div>
 
-                    <div class="form_question form_question--property-purpose">
-                        <label for="property-purpose"
-                            >Purpose of the property</label
+                        <div
+                            class="form_question form_question--property-purpose"
                         >
+                            <label for="property-purpose"
+                                >Purpose of the property</label
+                            >
 
-                        <select name="property-purpose">
-                            <option value="P">
-                                My primary home, which I will occupy fulltime
-                            </option>
-                            <option value="S">My second home</option>
-                            <option value="I">
-                                An investment property, which I don't plan on
-                                living in.
-                            </option>
-                        </select>
-                    </div>
+                            <select name="property-purpose">
+                                <option value="P">
+                                    My primary home, which I will occupy
+                                    fulltime
+                                </option>
+                                <option value="S">My second home</option>
+                                <option value="I">
+                                    An investment property, which I don't plan
+                                    on living in.
+                                </option>
+                            </select>
+                        </div>
 
-                    <div class="form__question form__question--monthly-income">
-                        <label for="income">Monthly income (USD)</label>
-                        <input type="text" name="income" /><br /><br />
-                    </div>
-
-                    <div class="form__question form__question--monthly-debt">
-                        <label for="debt">Monthly debt payments (USD)</label>
-                        <input type="text" name="debt" /><br /><br />
-                    </div>
-
-                    <div
-                        class="form__question form__question--old-mortgage-value"
-                    >
-                        <label for="old-mortgage-value"
-                            >Value of all your existing mortgages (enter 0 if
-                            none)</label
+                        <div
+                            class="form__question form__question--monthly-income"
                         >
-                        <input
-                            type="text"
-                            name="old-mortgage-value"
-                        /><br /><br />
-                    </div>
-                </div>
+                            <label for="income">Monthly income (USD)</label>
+                            <input type="text" name="income" /><br /><br />
+                        </div>
 
-                <div class="form__container form__container--loan">
-                    <h3 class="form__title form__title--loan">
-                        Loan Specific Questions
-                    </h3>
-
-                    <div class="form_question form_question--mortgage-purpose">
-                        <label for="mortgage-purpose"
-                            >Purpose of mortgage</label
+                        <div
+                            class="form__question form__question--monthly-debt"
                         >
-
-                        <select name="mortgage-purpose">
-                            <option value="P">
-                                First mortgage to purchase a property
-                            </option>
-                            <option value="C">
-                                Replacing existing mortgage, cash-out refinance
-                            </option>
-                            <option value="N">
-                                Replacing existing mortgage, no cash-out
-                                refinance
-                            </option>
-                        </select>
+                            <label for="debt"
+                                >Monthly debt payments (USD)</label
+                            >
+                            <input type="text" name="debt" /><br /><br />
+                        </div>
                     </div>
 
-                    <div
-                        class="form__question form__question--new-mortgage-value"
-                    >
-                        <label for="new-mortgage-value"
-                            >Requested loan size (USD)
-                        </label>
-                        <input
-                            type="text"
-                            name="new-mortgage-value"
-                        /><br /><br />
-                    </div>
+                    <div class="form__container form__container--loan">
+                        <h3 class="form__title form__title--loan">
+                            Loan Specific Questions
+                        </h3>
 
-                    <div class="form__question form__question--int-rt">
-                        <label for="int-rt">Desired interest rate </label>
-                        <input type="text" name="int-rt" /><br /><br />
-                    </div>
+                        <div
+                            class="form_question form_question--mortgage-purpose"
+                        >
+                            <label for="mortgage-purpose"
+                                >Purpose of mortgage</label
+                            >
 
-                    <div class="form__question form__question--length">
-                        <label for="length"
-                            >Desired length of loan (years)
-                        </label>
-                        <input type="text" name="length" /><br /><br />
-                    </div>
+                            <select name="mortgage-purpose">
+                                <option value="P">
+                                    First mortgage to purchase a property
+                                </option>
+                                <option value="C">
+                                    Replacing existing mortgage, cash-out
+                                    refinance
+                                </option>
+                                <option value="N">
+                                    Replacing existing mortgage, no cash-out
+                                    refinance
+                                </option>
+                            </select>
+                        </div>
 
-                    <div class="form__question form__question--insurance">
-                        <label for="insurance"
-                            >Amount of mortgage insurance (0 if none)
-                        </label>
-                        <input type="text" name="insurance" /><br /><br />
+                        <div
+                            class="form__question form__question--new-mortgage-value"
+                        >
+                            <label for="new-mortgage-value"
+                                >Requested loan size (USD)
+                            </label>
+                            <input
+                                type="text"
+                                name="new-mortgage-value"
+                            /><br /><br />
+                        </div>
+
+                        <div class="form__question form__question--int-rt">
+                            <label for="int-rt">Desired interest rate </label>
+                            <input type="text" name="int-rt" /><br /><br />
+                        </div>
+
+                        <div class="form__question form__question--length">
+                            <label for="length"
+                                >Desired length of loan (months)
+                            </label>
+                            <input type="text" name="length" /><br /><br />
+                        </div>
+
+                        <div class="form__question form__question--insurance">
+                            <label for="insurance"
+                                >Amount of mortgage insurance, as percentage of
+                                loan (0 if none)
+                            </label>
+                            <input type="text" name="insurance" /><br /><br />
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+                <button type="submit">Submit</button>
+            </form>
         </main>
         <footer class="contact" id="contact">
             <h2>Contact the project creator!</h2>
