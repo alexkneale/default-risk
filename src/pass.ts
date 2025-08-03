@@ -177,24 +177,6 @@ window.addEventListener("DOMContentLoaded", () => {
     // convert json object into regular object
     const parsedData: Record<string, string> = JSON.parse(userInputData);
 
-    // just append the data to the .score section
-    const scoreSection = document.querySelector(".score");
-    if (scoreSection) {
-        const summary = document.createElement("div");
-        summary.innerHTML = `
-            <h2>Your Submission</h2>
-            <ul>
-                ${Object.entries(parsedData)
-                    .map(
-                        ([key, value]) =>
-                            `<li><strong>${key}:</strong> ${value}</li>`
-                    )
-                    .join("")}
-            </ul>
-        `;
-        scoreSection.appendChild(summary);
-    }
-
     console.log(parsedData);
     const userFico = parseInt(parsedData["credit-score"]);
     const binSizeFico = 20;
@@ -248,6 +230,31 @@ window.addEventListener("DOMContentLoaded", () => {
                     label: "How common is defaulting?",
                     data: [2.2, 97.8],
                     backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+                    hoverOffset: 4,
+                },
+            ],
+        },
+    });
+
+    const pieAlgorithm = new Chart("pieAlgorithm", {
+        type: "pie",
+        data: {
+            labels: [
+                "Defaulting, and correctly flagged by algorithm",
+                "Defaulting, and mistakenly not flagged by algorithm",
+                "Not defaulting, and mistakenly flagged by algorithm",
+                "Not defaulting, and correctly not flagged by algorithm",
+            ],
+            datasets: [
+                {
+                    label: "How common is defaulting?",
+                    data: [1.5, 0.7, 25, 53],
+                    backgroundColor: [
+                        "rgb(255, 99, 132)",
+                        "rgb(54, 162, 235)",
+                        "rgb(255, 205, 86)",
+                        "green",
+                    ],
                     hoverOffset: 4,
                 },
             ],

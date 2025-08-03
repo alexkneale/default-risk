@@ -220,6 +220,12 @@ main {
     margin: 0 auto; /* center it */
 }
 
+.pie {
+    max-width: 500px; /* cap width on large screens */
+    width: 100%; /* responsive on small screens */
+    margin: 0 auto; /* center it */
+}
+
 @media screen and (min-width: devices.$desktop) {
     .navbar {
         // have navigation bar on right side, and name on left side, for desktop mdoe
