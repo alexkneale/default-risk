@@ -59,6 +59,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("mortgage-form") as HTMLFormElement;
 
+    document.getElementById("show-form-btn")!.addEventListener("click", () => {
+        const formContainer = document.getElementById("form-container")!;
+        formContainer.style.display = "block";
+
+        const formButton = document.getElementById("start-form")!;
+        formButton.style.display = "none";
+    });
+
     form.addEventListener("submit", (event) => {
         event.preventDefault(); // prevent form from reloading the page
 
@@ -87,10 +95,21 @@ window.addEventListener("DOMContentLoaded", () => {
         const debt = parseFloat(formValues["debt"]);
         const dti = income ? (debt / income) * 100 : 0;
 
+        if (dti > 100) {
+            alert(
+                "Your monthly debt cannot be greater than your monthly income."
+            );
+            return;
+        }
+
         // calc cltv with prop value and all mortgages
         const prop_value = parseFloat(formValues["prop_value"]);
         const orig_upb = parseFloat(formValues["new-mortgage-value"]);
         const cltv = prop_value ? (orig_upb / prop_value) * 100 : 0;
+        if (cltv > 100) {
+            alert("Requested loan size cannot exceed the property value.");
+            return;
+        }
 
         const int_rt = parseFloat(formValues["int-rt"]);
         const orig_loan_term = parseInt(formValues["length"]);
