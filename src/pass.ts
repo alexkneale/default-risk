@@ -65,7 +65,7 @@ Chart.register(yourScoreLabelPlugin);
 
 const form = document.getElementById("mortgage-form") as HTMLFormElement;
 
-if (!form) throw new Error("Shit");
+if (!form) throw new Error("No form");
 
 const displayGraph = (
     targetFeature: string,
@@ -176,6 +176,12 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     // convert json object into regular object
     const parsedData: Record<string, string> = JSON.parse(userInputData);
+    Object.entries(parsedData).forEach(([key, value]) => {
+        const input = form.elements.namedItem(key) as HTMLInputElement | null;
+        if (input) {
+            input.value = value;
+        }
+    });
 
     console.log(parsedData);
     const userFico = parseInt(parsedData["credit-score"]);
@@ -261,7 +267,7 @@ window.addEventListener("DOMContentLoaded", () => {
         },
     });
 
-    form.style.backgroundColor = "green";
+    form.style.backgroundColor = "#d1f5e0";
 });
 
 form.addEventListener("submit", (event) => {
@@ -274,9 +280,6 @@ form.addEventListener("submit", (event) => {
     formData.forEach((value, key) => {
         formValues[key] = value.toString();
     });
-
-    // Now you can manipulate the data however you like
-    console.log("Form values:", formValues);
 
     const cnt_units = parseInt(formValues["units"]);
     const prop_type = formValues["prop_type"];
@@ -328,12 +331,18 @@ form.addEventListener("submit", (event) => {
         .then((response) => response.json())
         .then((data) => {
             console.log("Prediction:", data.default_prediction);
+            const formMessage = document.getElementById("form-message");
             if (data.default_prediction === 1) {
+                console.log("HERE");
                 // User is at risk of default → redirect to fail page
-                form.style.backgroundColor = "red";
+                form.style.backgroundColor = "#fbe4e4";
+                formMessage!.innerText =
+                    "This mortgage request has been flagged as risky ⚠️";
             } else {
                 // User is not at risk → redirect to pass page
-                form.style.backgroundColor = "green";
+                form.style.backgroundColor = "#d1f5e0";
+                formMessage!.innerText =
+                    "This current mortgage request is approved ✅";
             }
         })
         .catch((error) => {

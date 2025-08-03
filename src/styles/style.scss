@@ -354,17 +354,29 @@ button[type="submit"] {
 
 .bar-graphs {
     max-width: 800px; /* cap width on large screens */
-    width: 100%; /* responsive on small screens */
+    width: 80%; /* responsive on small screens */
     margin: 0 auto; /* center it */
 }
 
 .pie {
     max-width: 500px; /* cap width on large screens */
-    width: 100%; /* responsive on small screens */
+    width: 80%; /* responsive on small screens */
     margin: 0 auto; /* center it */
+}
+.algorithm-pass {
+    padding-bottom: 50px;
 }
 
 @media screen and (min-width: devices.$desktop) {
+    .bar-graphs {
+        max-width: 600px; /* cap width on large screens */
+        margin: 0 auto; /* center it */
+    }
+
+    .pie {
+        max-width: 600px; /* cap width on large screens */
+        margin: 0 auto; /* center it */
+    }
     .navbar {
         // have navigation bar on right side, and name on left side, for desktop mdoe
 
