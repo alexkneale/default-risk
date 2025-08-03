@@ -16,22 +16,149 @@
                     <h2 class="hdr__writing--large">
                         Your loan request was flagged as risky.
                     </h2>
-                    <h3 class="hdr__writing--small">
-                        Scroll down to find out why.
-                    </h3>
+                    <h3 class="hdr__writing">Scroll down to find out why.</h3>
                 </div>
             </div>
         </header>
 
         <main>
-            <section class="score">How you did</section>
+            <section class="score">
+                <h2>Looking at your answers</h2>
+                In the form you just filled out, you answered a number of
+                questions, and based on your responses, our algorithm decided
+                that you were at risk of defaulting on a potential mortgage.
+                From analysing our data and algorithm, we've found that
+                <strong>Credit Score</strong>,
+                <strong>Requested Mortgage Size</strong> and
+                <strong>Debt to Income ratio</strong> (monthly debt payments
+                divided by monthly income) are the most important factors for
+                determining default risk. Below, we have shown you how your
+                responses to these three factors compared with the those in our
+                dataset. This may give you some indication as to why your
+                mortgage request was rejected.
+                <div class="fico-graph">
+                    <h4>Your Credit Score vs Rest of Consumer Population</h4>
+                    <canvas id="ficoChart" class="bar-graphs"></canvas>
+                </div>
 
-            <section class="fico-graph">
-                <h2>Your FICO vs Population</h2>
-                <canvas id="ficoChart"></canvas>
+                <div class="orig-upb-graph">
+                    <h4>
+                        Your Requested Mortgage Size vs Rest of Consumer
+                        Population
+                    </h4>
+                    <canvas id="orig_upbChart" class="bar-graphs"></canvas>
+                </div>
+
+                <div class="dti-graph">
+                    <h4>
+                        Your Debt to Income Ratio vs Rest of Consumer Population
+                    </h4>
+                    <canvas id="dtiChart" class="bar-graphs"></canvas>
+                </div>
             </section>
+
+            <section class="algorithm-pass">
+                <h2>Our Algorithm</h2>
+
+                <div class="algorithm__writing--1">
+                    You may be wondering "How common is defaulting on a
+                    mortgage?". Not common at all. In fact, only 2.2% of all
+                    mortgages ever default (see pie chart). That said,
+                    defaulting is very expensive for banks when it DOES happen.
+                    So best avoided.
+                    <br />
+                    <br />
+
+                    The goal of our algorithm is to determine what distinguishes
+                    the 2.2% of defaulting mortgages from the rest. The problem
+                    is, from our data, there may not be a whole lot separating
+                    someone who defaulted, from someone else who didn't. In
+                    other words, constructing an algorithm that can detect ALL
+                    people who are risk of defaulting, is a close-to-impossible
+                    task. A more realistic goal is to try to detect SOME of
+                    these risky mortgage requests, so that the bank will have a
+                    tool to avoid these risky investments.
+                    <br />
+                    <br />
+
+                    The problem with designing such an algorithm, is that you
+                    will always have to deal with
+                    <strong>misclassifications</strong>: default cases that are
+                    accidentally classified as non-risky, and (even more
+                    unfairly) perfectly safe mortgages that are misclassified as
+                    at risk of defaulting.
+                    <br />
+                    <br />
+                </div>
+
+                <div class="pie pie__default--container">
+                    <h4>How common is defaulting?</h4>
+                    <canvas
+                        id="pieDefault"
+                        class="pie__default--chart"
+                        max-width="500px"
+                        max-height="400px"
+                    ></canvas>
+                </div>
+
+                <div class="algorithm__writing--1">
+                    In our algorithm, we opted for a more conservative
+                    algorithm, which doesn't take many risks. In other words, it
+                    correctly detects 68% of all mortgages at risk of
+                    defaulting, but at the cost of misclassifying a lot of
+                    perfectly good mortgages as at-risk of defaulting.
+                    <br />
+                    <br />
+
+                    All of this is more easily explained looking at our pie
+                    chart here. We said earlier that, that 2.2% of all mortgages
+                    default, meaning that 97.8% of mortgages are perfectly safe
+                    investments for our bank. In our algorith, we correctly
+                    classify about a two thirds of risky defaults (1.5% of total
+                    population of mortgages). This means that roughly a third of
+                    risky mortgages (0.7% of all mortgages) effectively slip
+                    through our algorithm test. Nevertheless, our algorithm, on
+                    the whole, is good news for the bank, as we avoid giving
+                    away fair number of risky mortgages, which would lose the
+                    bank money.
+                    <br />
+                    <br />
+
+                    Here comes the flip side to our algorithm. Yes, we save
+                    money by avoiding 68% of all risky mortgages, but at a cost:
+                    misclassifying a significant number of perfectly safe
+                    mortgages as at-risk of defaulting. More exactly 25% of ALL
+                    mortgages. Therefore, even though we're saving money by
+                    avoiding some risky mortgages, we're also losing money by
+                    not doing business with many perfectly safe mortgages. In
+                    fact, if a mortgage request is flagged as risky by our
+                    algorithm, there is only a 5.7% chance that it would
+                    default. You can see the trade-off here.
+                    <br />
+                    <br />
+
+                    At our bank, and in many others, we have done the math, and
+                    found that we are still saving money overall by using this
+                    algorithm. This is good news for us, but less good news for
+                    you, as consumers. Below, we want to give you the
+                    opportunity to fill out the form as many times as you want,
+                    so you can effectively play around with the algorithm, and
+                    understand its inner workings.
+                </div>
+
+                <div class="pie pie__algorith--container">
+                    <h4>Results of our algorithm</h4>
+                    <canvas
+                        id="pieAlgorithm"
+                        class="pie__algorithm--chart"
+                        max-width="500px"
+                        max-height="400px"
+                    ></canvas>
+                </div>
+            </section>
+
             <form id="mortgage-form">
-                <section class="form">
+                <section id="form" class="form">
                     <!-- //// property questions 
                       // - What is the value of property? (towards cltv)
                       // - how many units is it (cnt_units)
@@ -57,34 +184,36 @@
                       // desired length of loan (orig_loan_term)
                       // how much mortgage insurance would you get? If none, input 0 (mi_pct) -->
 
-                    <h2>Mortgage Request Form</h2>
-                    <h5>
-                        NB, we only work with first mortgages or refinance
-                        mortgages.
-                    </h5>
+                    <h2 id="form-message">
+                        This mortgage request has been flagged as risky ⚠️
+                    </h2>
                     <div class="form__container form__container--property">
                         <h3 class="form__title form__title--property">
                             Property Questions
                         </h3>
                         <div class="form__question form__question--prop-value">
                             <label for="prop_value">Property Value (USD)</label>
-                            <input type="text" name="prop_value" /><br /><br />
+                            <input
+                                type="number"
+                                name="prop_value"
+                                required
+                            /><br /><br />
                         </div>
                         <div class="form__question form__question--units">
                             <label for="units"
                                 >Number of Units of Property</label
                             >
-                            <select name="units">
+                            <select name="units" required>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4+</option>
                             </select>
                         </div>
-                        <div class="form_question form_question--proptype">
+                        <div class="form__question form__question--proptype">
                             <label for="prop_type">Property Type</label>
 
-                            <select name="prop_type">
+                            <select name="prop_type" required>
                                 <option value="SF">Single-Family Home</option>
                                 <option value="CO">Condominium</option>
                                 <option value="PU">
@@ -96,7 +225,7 @@
                         <div class="form__question form__question--metro">
                             <label for="metro">In an urban area</label>
 
-                            <select name="metro">
+                            <select name="metro" required>
                                 <option value="True">Yes</option>
                                 <option value="False">No</option>
                             </select>
@@ -106,13 +235,13 @@
                         <h3 class="form__title form__title--personal">
                             Personal Questions
                         </h3>
-                        <div class="form_question form_question--proptype">
+                        <div class="form__question form__question--proptype">
                             <label for="people-responsible"
                                 >Number of people who will be responsible for
                                 mortgage</label
                             >
 
-                            <select name="people-responsible">
+                            <select name="people-responsible" required>
                                 <option value="1">1</option>
                                 <option value="2">More than 1</option>
                             </select>
@@ -120,34 +249,48 @@
                         <div
                             class="form__question form__question--credit-score"
                         >
-                            <label for="credit-score">Credit Score</label>
+                            <label for="credit-score"
+                                >Credit Score
+                                <span class="tooltip">
+                                    ❓
+                                    <span class="tooltip__text">
+                                        Credit Score ranges from 300 to 850. You
+                                        may have to convert your credit score if
+                                        your current bank calculates credit
+                                        score differently.
+                                    </span>
+                                </span></label
+                            >
                             <input
-                                type="text"
+                                type="number"
                                 name="credit-score"
+                                min="300"
+                                max="850"
+                                required
                             /><br /><br />
                         </div>
 
                         <div
-                            class="form_question form_question--first-property"
+                            class="form__question form__question--first-property"
                         >
                             <label for="first-property"
                                 >Ever bought a property before?</label
                             >
 
-                            <select name="first-property">
+                            <select name="first-property" required>
                                 <option value="N">Yes</option>
                                 <option value="Y">No</option>
                             </select>
                         </div>
 
                         <div
-                            class="form_question form_question--property-purpose"
+                            class="form__question form__question--property-purpose"
                         >
                             <label for="property-purpose"
                                 >Purpose of the property</label
                             >
 
-                            <select name="property-purpose">
+                            <select name="property-purpose" required>
                                 <option value="P">
                                     My primary home, which I will occupy
                                     fulltime
@@ -164,7 +307,11 @@
                             class="form__question form__question--monthly-income"
                         >
                             <label for="income">Monthly income (USD)</label>
-                            <input type="text" name="income" /><br /><br />
+                            <input
+                                type="number"
+                                name="income"
+                                required
+                            /><br /><br />
                         </div>
 
                         <div
@@ -173,17 +320,21 @@
                             <label for="debt"
                                 >Monthly debt payments (USD)</label
                             >
-                            <input type="text" name="debt" /><br /><br />
+                            <input
+                                type="number"
+                                name="debt"
+                                required
+                            /><br /><br />
                         </div>
                     </div>
 
                     <div class="form__container form__container--loan">
                         <h3 class="form__title form__title--loan">
-                            Loan Specific Questions
+                            Mortgage Specific Questions
                         </h3>
 
                         <div
-                            class="form_question form_question--mortgage-purpose"
+                            class="form__question form__question--mortgage-purpose"
                         >
                             <label for="mortgage-purpose"
                                 >Purpose of mortgage</label
@@ -208,32 +359,46 @@
                             class="form__question form__question--new-mortgage-value"
                         >
                             <label for="new-mortgage-value"
-                                >Requested loan size (USD)
+                                >Requested mortgage size (USD)
                             </label>
                             <input
-                                type="text"
+                                type="number"
                                 name="new-mortgage-value"
                             /><br /><br />
                         </div>
 
                         <div class="form__question form__question--int-rt">
-                            <label for="int-rt">Desired interest rate </label>
-                            <input type="text" name="int-rt" /><br /><br />
+                            <label for="int-rt"
+                                >Desired interest rate (%)
+                            </label>
+                            <input
+                                type="number"
+                                min="0"
+                                max="10"
+                                name="int-rt"
+                            /><br /><br />
                         </div>
 
                         <div class="form__question form__question--length">
                             <label for="length"
-                                >Desired length of loan (months)
+                                >Desired length of Mortgage (months)
                             </label>
-                            <input type="text" name="length" /><br /><br />
+                            <input type="number" name="length" /><br /><br />
                         </div>
 
                         <div class="form__question form__question--insurance">
                             <label for="insurance"
                                 >Amount of mortgage insurance, as percentage of
-                                loan (0 if none)
+                                mortgage value (0 if none)
                             </label>
-                            <input type="text" name="insurance" /><br /><br />
+                            <input
+                                type="number"
+                                min="0"
+                                ,
+                                max="100"
+                                ,
+                                name="insurance"
+                            /><br /><br />
                         </div>
                     </div>
                 </section>
