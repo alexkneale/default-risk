@@ -36,7 +36,6 @@ const yourScoreLabelPlugin = {
     afterDatasetsDraw(chart: any) {
         const {
             ctx,
-            chartArea: { top },
             scales: { x, y },
         } = chart;
 
@@ -125,7 +124,7 @@ const displayGraph = (
                 idx === userIndex ? "red" : "rgba(54, 162, 235, 0.5)"
             );
 
-            const ourChart = new Chart(targetFeature + "Chart", {
+            new Chart(targetFeature + "Chart", {
                 type: "bar",
                 data: {
                     labels,
@@ -227,7 +226,7 @@ window.addEventListener("DOMContentLoaded", () => {
         "Requested Loan Size"
     );
 
-    const pieDefault = new Chart("pieDefault", {
+    new Chart("pieDefault", {
         type: "pie",
         data: {
             labels: ["Defaulting", "Not Defaulting"],
@@ -242,7 +241,7 @@ window.addEventListener("DOMContentLoaded", () => {
         },
     });
 
-    const pieAlgorithm = new Chart("pieAlgorithm", {
+    new Chart("pieAlgorithm", {
         type: "pie",
         data: {
             labels: [

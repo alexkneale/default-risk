@@ -42,7 +42,7 @@ function typeWriterSequence(
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    const h2 = document.getElementById("animation");
+    const h2 = document.getElementById("animation")!;
 
     function startSequence() {
         typeWriterSequence(
