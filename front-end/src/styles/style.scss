@@ -1,0 +1,568 @@
+// about me desktop
+// clean up repetition with mixins
+// overflow for smaller screens
+
+// NOTE --> default is mobile version
+@use "devices";
+@use "mixins";
+
+// settings for typing animation
+// simulates blinking text cursor
+@keyframes blink {
+    0%,
+    50%,
+    100% {
+        opacity: 1;
+    }
+    25%,
+    75% {
+        opacity: 0;
+    }
+}
+
+// universally reset box sizing
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+body {
+    // font
+    font-family: "IBM Plex Sans", sans-serif;
+    // avoiding potential overflow
+    width: 100vw;
+    height: 100vh;
+
+    overflow-x: hidden;
+
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    justify-content: center;
+}
+//do NOT display name on top left for mobile version (only desktop)
+.navbar__sitename {
+    display: none;
+}
+
+.navbar__content {
+    // nav with white background, covering whole of top
+    background-color: white;
+    width: 100%;
+}
+
+.navbar__list {
+    // no bullet points etc
+    list-style: none;
+    // create flexbox across whole row
+
+    @include mixins.flexbox(row, space-evenly, stretch);
+
+    width: 100%;
+
+    // padding, spacing etc
+    padding: 1rem 0.5rem;
+    top: 0;
+    left: 0;
+}
+
+.navbar__button {
+    //don't allow text to wrap, as this looks ugly
+    white-space: nowrap;
+
+    // set font size to small, to avoid potential overflow
+    font-size: small;
+    text-decoration: none;
+    color: black;
+
+    // settings when hovering
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    // padding, spacing etc
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 1rem 0.25rem;
+    border-radius: 8px;
+
+    // invert colours when hovering
+    &:hover {
+        background-color: black;
+        color: white;
+    }
+}
+
+// main header
+.hdr {
+    padding: 2rem;
+
+    // flex container, row direction
+    &__content {
+        //flexbox
+        @include mixins.flexbox(row, center, center);
+        padding: 2rem;
+    }
+    //profile
+    &__img {
+        display: none;
+    }
+
+    // settings for typing animation
+    // simulates blinking text cursor
+    &__writing--small::after {
+        content: "|";
+        animation: blink 1s infinite;
+        margin-left: 2px;
+        color: #444;
+    }
+}
+
+//padding in main
+main {
+    padding: 1rem;
+}
+// about section
+.about {
+    // center section title
+    &__title {
+        &--mobile {
+            text-align: center;
+        }
+        &--desktop {
+            display: none;
+        }
+    }
+    // container settings
+    &__content {
+        // paragraph and profile photo settings
+        &--paragraph {
+            text-align: center;
+        }
+
+        &--img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50vw;
+        }
+    }
+}
+
+// about section
+.algorithm {
+    // center section title
+    &__title {
+        &--mobile {
+            text-align: center;
+        }
+        &--desktop {
+            display: none;
+        }
+    }
+    // container settings
+    &__content {
+        // paragraph and profile photo settings
+        &--paragraph {
+            text-align: center;
+        }
+
+        &--img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50vw;
+        }
+    }
+}
+
+#start-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh; // center vertically in viewport
+    padding: 2rem;
+
+    button {
+        background-color: black;
+        color: #ffffff;
+        font-size: 1.25rem;
+        font-weight: 600;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease, transform 0.2s ease;
+
+        &:hover {
+            background-color: #003f7d;
+            transform: translateY(-2px);
+        }
+
+        &:disabled {
+            background-color: #999;
+            cursor: wait;
+            box-shadow: none;
+        }
+    }
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    margin-left: 0.25rem;
+    font-weight: bold;
+    color: #00509d;
+    cursor: help;
+}
+
+.tooltip__text {
+    visibility: hidden;
+    width: 250px;
+    background-color: #003366;
+    color: #ffffff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 0.5rem;
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    left: 110%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-weight: normal;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tooltip:hover .tooltip__text {
+    visibility: visible;
+    opacity: 1;
+}
+
+form {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #d9e2ec;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.form__container {
+    margin-bottom: 2rem;
+    padding: 1rem 0;
+    border-top: 1px solid #e0e6ed;
+
+    &:first-child {
+        border-top: none;
+    }
+}
+
+.form__title {
+    font-size: 1.25rem;
+    color: #00509d;
+    margin-bottom: 1rem;
+}
+
+.form__question {
+    margin-bottom: 1.5rem;
+
+    label {
+        display: block;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 0.6rem;
+        border: 1px solid #cbd5e0;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: border-color 0.2s;
+
+        &:focus {
+            border-color: #00509d;
+            outline: none;
+        }
+    }
+}
+
+button[type="submit"] {
+    background-color: #00509d;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: #003f7d;
+    }
+}
+
+// footer settings
+.contact {
+    h2 {
+        padding-top: 40px;
+    }
+    color: white;
+    background: #111;
+    text-align: center;
+
+    // flex container, row direction, for links
+    &__list {
+        list-style: none;
+        @include mixins.flexbox(row, space-evenly, center);
+
+        padding: 1rem;
+    }
+    //logo buttons
+    &__btn {
+        @include mixins.button-base(#111, white, 1rem, 15%);
+
+        align-items: center;
+
+        &--1 {
+            border-radius: 50%;
+        }
+        svg {
+            fill: white;
+        }
+
+        // invert colours when hovering
+        @include mixins.invert-hover();
+    }
+
+    &__email {
+        padding-bottom: 2rem;
+    }
+}
+
+.bar-graphs {
+    max-width: 800px; /* cap width on large screens */
+    width: 80%; /* responsive on small screens */
+    margin: 0 auto; /* center it */
+}
+
+.pie {
+    max-width: 500px; /* cap width on large screens */
+    width: 80%; /* responsive on small screens */
+    margin: 0 auto; /* center it */
+}
+.algorithm-pass {
+    padding-bottom: 50px;
+}
+
+@media screen and (min-width: devices.$desktop) {
+    .bar-graphs {
+        max-width: 600px; /* cap width on large screens */
+        margin: 0 auto; /* center it */
+    }
+
+    .pie {
+        max-width: 600px; /* cap width on large screens */
+        margin: 0 auto; /* center it */
+    }
+    .navbar {
+        // have navigation bar on right side, and name on left side, for desktop mdoe
+
+        // flexbox
+        @include mixins.flexbox(row, space-between, center);
+
+        padding: 1rem;
+        background-color: white;
+        width: 100%;
+        padding-bottom: 3rem;
+
+        // let site name appear on far right for desktop mode
+        &__sitename {
+            display: block;
+            color: black;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        // nav bar on right, with more spacing
+        &__content {
+            width: auto;
+
+            ul {
+                //flexbox
+                @include mixins.flexbox();
+
+                list-style: none;
+                gap: 1rem; // space between nav items
+                padding: 0;
+                margin: 0;
+
+                li a {
+                    font-size: small;
+                    text-decoration: none;
+                    color: black;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    padding: 1rem 1rem;
+                    border-radius: 8px;
+
+                    &:hover {
+                        background-color: black;
+                        color: white;
+                        border: 2px solid white;
+                    }
+                }
+            }
+        }
+    }
+
+    .hdr__content {
+        // allow more space for desktop mode
+        gap: 2rem;
+        justify-content: center;
+        // let image appear for desktop mode
+        img {
+            display: block;
+            width: 30vw;
+            height: auto;
+        }
+    }
+
+    .about {
+        //
+        // center section title
+        &__title {
+            &--mobile {
+                display: none;
+            }
+            &--desktop {
+                display: inline;
+                //padding-bottom: 5rem;
+                //text-align: left;
+            }
+        }
+        &__content {
+            // place image on left, and text on left, for desktop mode
+            @include mixins.flexbox(row, space-between, center);
+
+            gap: 5rem; // space between image and paragraph
+            margin: 0 auto;
+            padding: 3rem 1rem;
+
+            // less wide image for desktop mode
+            &--img {
+                width: 40vw;
+                max-width: 400px;
+                height: auto;
+                border-radius: 4px;
+            }
+
+            // wider paragraph
+
+            &--paragraph {
+                width: 90%;
+                //font-size: clamp(1rem, 2vw + 0.05rem, 1.3rem);
+                //font-size: 1rem;
+                line-height: 1.5;
+                text-align: left;
+                padding-top: 2rem;
+            }
+        }
+    }
+
+    .algorithm {
+        //
+        // center section title
+        &__title {
+            &--mobile {
+                display: none;
+            }
+            &--desktop {
+                display: inline;
+                //padding-bottom: 5rem;
+                //text-align: left;
+            }
+        }
+
+        &__content {
+            // place image on left, and text on left, for desktop mode
+            @include mixins.flexbox(row, space-between, center);
+
+            gap: 5rem; // space between image and paragraph
+            margin: 0 auto;
+            padding: 3rem 1rem;
+
+            // less wide image for desktop mode
+            &--img {
+                width: 40vw;
+                max-width: 500px;
+                height: auto;
+                border-radius: 4px;
+                padding-right: 50px;
+            }
+
+            // wider paragraph
+
+            &--paragraph {
+                width: 90%;
+                //font-size: clamp(1rem, 2vw + 0.05rem, 1.3rem);
+                //font-size: 1rem;
+                line-height: 1.5;
+                text-align: left;
+                padding-top: 2rem;
+            }
+        }
+    }
+}
+
+// had to change some padding and settings, as there were some minor issues for very small screens
+
+@media screen and (max-width: devices.$small) and (min-width: devices.$xsmall) {
+    .navbar__button {
+        padding: 0.5rem 0.5rem;
+        font-size: 0.5rem;
+    }
+
+    .about__content--img {
+        width: 60vw;
+    }
+    .algorithm__content--img {
+        width: 60vw;
+    }
+}
+
+@media screen and (max-width: devices.$xsmall) {
+    .navbar {
+        padding: none;
+
+        &__button {
+            padding: 0.2rem;
+            font-size: 0.5rem;
+        }
+    }
+
+    .about__content--img {
+        width: 60vw;
+    }
+    .algorithm__content--img {
+        width: 60vw;
+    }
+
+    .contact__btn {
+        gap: 0.1em;
+        .button {
+            padding: 0.5em;
+        }
+    }
+}
