@@ -30,6 +30,8 @@
 html {
     margin: 0;
     padding: 0;
+    width: 100vw;
+    height: 100vh;
 }
 body {
     // font
@@ -45,6 +47,10 @@ body {
     line-height: 1.6;
     justify-content: center;
 }
+.navbar {
+    background-color: black;
+    width: 100%;
+}
 //do NOT display name on top left for mobile version (only desktop)
 .navbar__sitename {
     display: none;
@@ -52,7 +58,7 @@ body {
 
 .navbar__content {
     // nav with white background, covering whole of top
-    background-color: white;
+    background-color: black;
     width: 100%;
 }
 
@@ -78,7 +84,7 @@ body {
     // set font size to small, to avoid potential overflow
     font-size: small;
     text-decoration: none;
-    color: black;
+    color: white;
 
     // settings when hovering
     cursor: pointer;
@@ -92,8 +98,8 @@ body {
 
     // invert colours when hovering
     &:hover {
-        background-color: black;
-        color: white;
+        background-color: white;
+        color: black;
     }
 }
 
@@ -384,16 +390,16 @@ button[type="submit"] {
         @include mixins.flexbox(row, space-between, center);
 
         padding: 1rem;
-        background-color: white;
+        background-color: black;
         width: 100%;
         padding-bottom: 3rem;
 
         // let site name appear on far right for desktop mode
         &__sitename {
             display: block;
-            color: black;
+            color: white;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
         }
         // nav bar on right, with more spacing
         &__content {
@@ -411,16 +417,16 @@ button[type="submit"] {
                 li a {
                     font-size: small;
                     text-decoration: none;
-                    color: black;
+                    color: white;
                     cursor: pointer;
                     transition: all 0.2s ease;
                     padding: 1rem 1rem;
                     border-radius: 8px;
 
                     &:hover {
-                        background-color: black;
-                        color: white;
-                        border: 2px solid white;
+                        background-color: white;
+                        color: black;
+                        border: 2px solid black;
                     }
                 }
             }
