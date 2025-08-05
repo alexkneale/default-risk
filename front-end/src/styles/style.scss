@@ -375,25 +375,55 @@ button[type="submit"] {
     margin: 0 auto; /* center it */
 }
 
-.pie {
-    max-width: 500px; /* cap width on large screens */
-    width: 80%; /* responsive on small screens */
-    margin: 0 auto; /* center it */
-}
 .algorithm-pass {
     padding-bottom: 50px;
-}
 
-@media screen and (min-width: devices.$desktop) {
-    .bar-graphs {
-        max-width: 600px; /* cap width on large screens */
-        margin: 0 auto; /* center it */
+    .algorithm-block {
+        display: block;
+        margin-bottom: 3rem;
+    }
+
+    .algorithm__writing {
+        width: 90%;
+        margin: 0 auto 2rem;
+        line-height: 1.6;
     }
 
     .pie {
-        max-width: 600px; /* cap width on large screens */
-        margin: 0 auto; /* center it */
+        width: 80%;
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+
+        canvas {
+            width: 100%;
+            height: auto;
+        }
     }
+}
+
+@media screen and (min-width: devices.$desktop) {
+    .algorithm-pass {
+        .algorithm-block {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 5rem;
+        }
+
+        .algorithm__writing {
+            flex: 1;
+            max-width: 60%;
+        }
+
+        .pie {
+            flex: 0 0 35%;
+            max-width: 500px;
+        }
+    }
+
     .navbar {
         // have navigation bar on right side, and name on left side, for desktop mdoe
 
