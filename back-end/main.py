@@ -32,6 +32,10 @@ class MortgageData(BaseModel):
 # FastAPI app
 app = FastAPI()
 
+@app.get("/")
+def home():
+    return {"message": "Hello, world!"}
+
 # CORS setup
 app.add_middleware(
     CORSMiddleware,
