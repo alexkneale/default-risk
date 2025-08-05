@@ -75,7 +75,7 @@ const displayGraph = (
     featureName: string
 ) => {
     // Load CSV and build histogram
-    fetch("/data/freddiemac.csv")
+    fetch(`${import.meta.env.BASE_URL}data/freddiemac.csv`)
         .then((res) => res.text())
         .then((csv) => {
             const parsed = Papa.parse(csv, {
