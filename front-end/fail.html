@@ -24,9 +24,6 @@
         <main>
             <section class="score">
                 <h2>Looking at your answers</h2>
-                In the form you just filled out, you answered a number of
-                questions, and based on your responses, our algorithm decided
-                that you were at risk of defaulting on a potential mortgage.
                 From analysing our data and algorithm, we've found that
                 <strong>Credit Score</strong>,
                 <strong>Requested Mortgage Size</strong> and
@@ -34,8 +31,8 @@
                 divided by monthly income) are the most important factors for
                 determining default risk. Below, we have shown you how your
                 responses to these three factors compared with the those in our
-                dataset. This may give you some indication as to why your
-                mortgage request was rejected.
+                dataset, to help give you some idea as to why your mortgage
+                request was rejected.
                 <div class="fico-graph">
                     <h4>Your Credit Score vs Rest of Consumer Population</h4>
                     <canvas id="ficoChart" class="bar-graphs"></canvas>
@@ -61,92 +58,77 @@
                 <h2>Our Algorithm</h2>
                 <div class="algorithm-block">
                     <div class="algorithm__writing">
-                        You may be wondering "How common is defaulting on a
-                        mortgage?". Not common at all. In fact, only 2.2% of all
-                        mortgages ever default (see pie chart). That said,
-                        defaulting is very expensive for banks when it DOES
-                        happen. So best avoided.
+                        How common is defaulting on a mortgage? Not common at
+                        all. In fact, according to our dataset, only
+                        <strong>2.2%</strong> of mortgages default (see pie
+                        chart). However, defaulting is very expensive for banks
+                        when it does happen. So best avoided.
                         <br />
                         <br />
 
-                        The goal of our algorithm is to determine what
-                        distinguishes the 2.2% of defaulting mortgages from the
-                        rest. The problem is, from our data, there may not be a
-                        whole lot separating someone who defaulted, from someone
-                        else who didn't. In other words, constructing an
-                        algorithm that can detect ALL people who are risk of
-                        defaulting, is a close-to-impossible task. A more
-                        realistic goal is to try to detect SOME of these risky
-                        mortgage requests, so that the bank will have a tool to
-                        avoid these risky investments.
+                        Our goal is to build an algorithm that identifies which
+                        mortgages are likely to default. The challenge is that
+                        defaulters often look very similar to non-defaulters in
+                        the data — making 100% accuracy nearly impossible.
                         <br />
                         <br />
 
-                        The problem with designing such an algorithm, is that
-                        you will always have to deal with
-                        <strong>misclassifications</strong>: default cases that
-                        are accidentally classified as non-risky, and (even more
-                        unfairly) perfectly safe mortgages that are
-                        misclassified as at risk of defaulting.
+                        Instead, we aim to detect <strong>some</strong> risky
+                        cases — even if that means occasionally misclassifying
+                        safe ones. This leads to a trade-off: catching real
+                        risks while minimizing false alarms.
+
                         <br />
                         <br />
                     </div>
+                    <div class="pie pie__default--container">
+                        <h4>How common is defaulting?</h4>
+                        <canvas
+                            id="pieDefault"
+                            class="pie__default--chart"
+                            max-width="500px"
+                            max-height="400px"
+                        ></canvas>
+                    </div>
                 </div>
 
-                <div class="pie pie__default--container">
-                    <h4>How common is defaulting?</h4>
-                    <canvas
-                        id="pieDefault"
-                        class="pie__default--chart"
-                        max-width="500px"
-                        max-height="400px"
-                    ></canvas>
-                </div>
                 <div class="algorithm-block">
                     <div class="algorithm__writing">
-                        In our algorithm, we opted for a more conservative
-                        algorithm, which doesn't take many risks. In other
-                        words, it correctly detects 68% of all mortgages at risk
-                        of defaulting, but at the cost of misclassifying a lot
-                        of perfectly good mortgages as at-risk of defaulting.
+                        We chose a <strong>conservative approach</strong>: one
+                        that catches as many risky mortgages as possible, even
+                        if it flags some safe ones by mistake.
                         <br />
                         <br />
 
-                        All of this is more easily explained looking at our pie
-                        chart here. We said earlier that, that 2.2% of all
-                        mortgages default, meaning that 97.8% of mortgages are
-                        perfectly safe investments for our bank. In our
-                        algorith, we correctly classify about a two thirds of
-                        risky defaults (1.5% of total population of mortgages).
-                        This means that roughly a third of risky mortgages (0.7%
-                        of all mortgages) effectively slip through our algorithm
-                        test. Nevertheless, our algorithm, on the whole, is good
-                        news for the bank, as we avoid giving away fair number
-                        of risky mortgages, which would lose the bank money.
+                        Our algorithm correctly identifies
+                        <strong>68% of all defaults</strong> — that`s
+                        <strong>1.5%</strong> of all mortgages. However, it
+                        <strong>misses 32%</strong> of defaults (<strong
+                            >0.7%</strong
+                        >
+                        of all mortgages), which slip through.
                         <br />
                         <br />
 
-                        Here comes the flip side to our algorithm. Yes, we save
-                        money by avoiding 68% of all risky mortgages, but at a
-                        cost: misclassifying a significant number of perfectly
-                        safe mortgages as at-risk of defaulting. More exactly
-                        25% of ALL mortgages. Therefore, even though we're
-                        saving money by avoiding some risky mortgages, we're
-                        also losing money by not doing business with many
-                        perfectly safe mortgages. In fact, if a mortgage request
-                        is flagged as risky by our algorithm, there is only a
-                        5.7% chance that it would default. You can see the
-                        trade-off here.
+                        More importantly, it
+                        <strong>misclassifies 25% of all mortgages</strong> as
+                        risky when they`re actually safe. That means if your
+                        mortgage is flagged as risky, there's only a
+                        <strong>5.7% chance it would actually default</strong>.
                         <br />
                         <br />
 
-                        At our bank, and in many others, we have done the math,
-                        and found that we are still saving money overall by
-                        using this algorithm. This is good news for us, but less
-                        good news for you, as consumers. Below, we want to give
-                        you the opportunity to fill out the form as many times
-                        as you want, so you can effectively play around with the
-                        algorithm, and understand its inner workings.
+                        Despite this, we found the algorithm
+                        <strong>saves money overall</strong>, by helping avoid
+                        enough risky loans to offset the missed opportunities.
+                        It`s a win for the bank — though not always for the
+                        consumer.
+                        <br />
+                        <br />
+
+                        To help you explore this trade-off, we’ve made the
+                        algorithm interactive: try the form below as many times
+                        as you`d like and see how it responds.
                     </div>
                     <div class="pie pie__algorith--container">
                         <h4>Results of our algorithm</h4>
