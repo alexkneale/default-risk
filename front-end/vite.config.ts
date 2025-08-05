@@ -1,11 +1,18 @@
 import { defineConfig } from "vite";
-import path from "path";
+import { resolve } from "path";
 
 export default defineConfig({
     base: "/default-risk/",
-    resolve: {
-        alias: {
-            "@": path.resolve(__dirname, "./src"),
+    root: "front-end", // point to your front-end folder
+    build: {
+        outDir: "../dist", // put build output in root-level dist/
+        emptyOutDir: true,
+        rollupOptions: {
+            input: {
+                main: resolve(__dirname, "front-end/index.html"),
+                fail: resolve(__dirname, "front-end/fail.html"),
+                pass: resolve(__dirname, "front-end/pass.html"),
+            },
         },
     },
 });
