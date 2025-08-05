@@ -5,7 +5,7 @@ import { resolve } from "path";
 export default defineConfig({
     base: "/default-risk/",
     build: {
-        outDir: "../dist",
+        outDir: "../dist", // Go up one level to write to root-level dist/
         emptyOutDir: true,
         rollupOptions: {
             input: {
