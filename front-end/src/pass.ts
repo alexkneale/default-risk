@@ -320,7 +320,7 @@ form.addEventListener("submit", (event) => {
         metro: metro === "True",
     };
 
-    fetch("http://localhost:8000/predict", {
+    fetch("https://default-risk.onrender.com/predict", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
