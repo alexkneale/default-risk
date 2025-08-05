@@ -65,6 +65,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const formButton = document.getElementById("start-form")!;
         formButton.style.display = "none";
+
+        // Wake up the backend server
+        fetch("https://default-risk.onrender.com/", { method: "GET" })
+            .then(() => console.log("Server woken up!"))
+            .catch((err) => console.warn("Server wake-up failed:", err));
     });
 
     form.addEventListener("submit", (event) => {
