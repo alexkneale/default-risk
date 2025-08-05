@@ -124,6 +124,10 @@ body {
     &__img {
         display: none;
     }
+    &__message {
+        display: flex;
+        justify-content: center;
+    }
 
     // settings for typing animation
     // simulates blinking text cursor
@@ -402,15 +406,47 @@ button[type="submit"] {
     }
 }
 
+.score {
+    padding: 10px;
+    h2 {
+        padding: 10px;
+    }
+}
+.fico-graph {
+    display: flex;
+    align-items: center;
+    h4 {
+        padding: 10px;
+    }
+}
+
+.orig-upb-graph {
+    display: flex;
+    align-items: center;
+    h4 {
+        padding: 10px;
+    }
+}
+
+.dti-graph {
+    display: flex;
+    align-items: center;
+    h4 {
+        padding: 10px;
+    }
+}
 @media screen and (min-width: devices.$desktop) {
     .algorithm-pass {
+        h2 {
+            padding-left: 30px;
+        }
         .algorithm-block {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             gap: 3rem;
-            max-width: 1200px;
             margin: 0 auto 5rem;
+            padding-left: 30px;
         }
 
         .algorithm__writing {
@@ -426,14 +462,13 @@ button[type="submit"] {
 
     .navbar {
         // have navigation bar on right side, and name on left side, for desktop mdoe
-
         // flexbox
-        @include mixins.flexbox(row, space-between, center);
+        // @include mixins.flexbox(row, space-between, center);
 
-        padding: 1rem;
-        background-color: black;
-        width: 100%;
-        padding-bottom: 3rem;
+        // padding: 1rem;
+        // background-color: black;
+        // width: 100%;
+        // padding-bottom: 3rem;
 
         // let site name appear on far right for desktop mode
         &__sitename {
@@ -443,8 +478,12 @@ button[type="submit"] {
             font-size: 1.5rem;
         }
         // nav bar on right, with more spacing
-        &__content {
+
+        &__container {
             width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
 
             ul {
                 //flexbox
