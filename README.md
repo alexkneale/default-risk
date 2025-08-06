@@ -82,14 +82,14 @@ default-risk/
 │ ├── index.html # Homepage with user form
 │ ├── pass.html # Approved application result
 │ ├── fail.html # Rejected application result
-│ ├── src/
+│ └── src/
 │     ├── main.ts # Handles functionality of index.html, submission, DOM updates etc
 │     ├── pass.ts # Handles functionality of pass.html, submission, DOM updates etc
 │     ├── fail.ts # Handles functionality of fail.html, submission, DOM updates etc
-│     ├── styles/
+│     └── styles/
 │         ├── style.scss
 │         ├── mixins.scss
-│         ├── devices.scss
+│         └── devices.scss
 │
 ├── README.md
 ├── .gitignore
