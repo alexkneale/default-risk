@@ -70,7 +70,8 @@ This is a full-stack web application that allows users to evaluate their mortgag
 ---
 
 ## 📁 Project Structure
-project-root/
+```
+default-risk/
 ├── backend/ # Python FastAPI server + ML model
 │ ├── model.joblib # Trained ML model
 │ ├── requirements.txt # Python libraries for running model
@@ -93,6 +94,7 @@ project-root/
 ├── README.md
 ├── .gitignore
 └── package.json / pom.xml # If using a build tool for frontend/backend
+```
 
 
 ---
