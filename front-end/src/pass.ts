@@ -34,26 +34,25 @@ Chart.register(
 const yourScoreLabelPlugin = {
     id: "yourScoreLabelPlugin",
     afterDatasetsDraw(chart: any) {
-        const {
-            ctx,
-            scales: { x, y },
-        } = chart;
+        const { ctx, data } = chart;
 
-        const userBarIndex = chart.config.data.datasets[0].data.findIndex(
+        const dataset = chart.getDatasetMeta(0);
+        const dataPoints = dataset.data;
+
+        const userBarIndex = data.datasets[0].data.findIndex(
             (_: any, idx: number) =>
-                chart.config.data.datasets[0].backgroundColor[idx] === "red"
+                data.datasets[0].backgroundColor[idx] === "red"
         );
 
-        if (userBarIndex === -1) return;
+        if (userBarIndex === -1 || !dataPoints[userBarIndex]) return;
 
-        const barX = x.getPixelForTick(userBarIndex);
-        const barY = y.getPixelForValue(
-            chart.config.data.datasets[0].data[userBarIndex] || 0
-        );
+        const bar = dataPoints[userBarIndex];
+        const barX = bar.x;
+        const barY = bar.y;
 
         ctx.save();
         ctx.fillStyle = "black";
-        ctx.font = "bold 10px sans-serif";
+        ctx.font = "bold 12px sans-serif";
         ctx.textAlign = "center";
         ctx.fillText("You", barX, barY - 10);
         ctx.restore();
