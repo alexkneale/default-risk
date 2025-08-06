@@ -47,11 +47,10 @@ This is a full-stack web application that allows users to evaluate their mortgag
 
 ## 🧠 Machine Learning
 
-- **Model**: Decision Tree Classifier (`sklearn`)
+- **Model**: Soft Voting Classifier, composed of Decision Tree Classifier and Multinomial Naive Bayes Classifier 
 - **Preprocessing**: ColumnTransformer pipeline with:
   - Numerical preprocessing
   - Categorical encoding
-  - Count vectorization (if applicable)
 - **Evaluation Metrics**:
   - Accuracy, Precision, Recall, F1-score
   - Results saved to `.json` for reference
@@ -82,9 +81,14 @@ project-root/
 │ ├── index.html # Homepage with user form
 │ ├── pass.html # Approved application result
 │ ├── fail.html # Rejected application result
-│ ├── style.scss / css # Stylesheets
-│ ├── script.ts # Handles form submission, DOM updates
-│ └── assets/ # Chart.js config, utility files
+│ ├── src/
+│     ├── main.ts # Handles functionality of index.html, submission, DOM updates etc
+│     ├── pass.ts # Handles functionality of pass.html, submission, DOM updates etc
+│     ├── fail.ts # Handles functionality of fail.html, submission, DOM updates etc
+│     ├── styles/
+│         ├── style.scss
+│         ├── mixins.scss
+│         ├── devices.scss
 │
 ├── README.md
 ├── .gitignore
@@ -109,25 +113,9 @@ project-root/
 
 ---
 
-## 📊 Model Explanation
+## Link
 
-- **Why Decision Trees?**
-  - Interpretable structure
-  - Fast to train and predict
-  - Handles both categorical and numerical features well
+https://alexkneale.github.io/default-risk/
 
-- **Handling Class Imbalance**
-  - Applied class weights to account for skewed data
-  - Evaluation includes F1-score to better reflect minority class performance
-
----
-
-## 🧪 How to Run Locally
-
-### 1. Backend (Python FastAPI)
-```bash
-cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload
 
 
