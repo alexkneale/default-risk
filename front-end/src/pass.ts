@@ -53,7 +53,7 @@ const yourScoreLabelPlugin = {
 
         ctx.save();
         ctx.fillStyle = "black";
-        ctx.font = "bold 12px sans-serif";
+        ctx.font = "bold 10px sans-serif";
         ctx.textAlign = "center";
         ctx.fillText("You", barX, barY - 10);
         ctx.restore();
@@ -337,11 +337,19 @@ form.addEventListener("submit", (event) => {
                 form.style.backgroundColor = "#fbe4e4";
                 formMessage!.innerText =
                     "This mortgage request has been flagged as risky ⚠️";
+                formMessage?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
             } else {
                 // User is not at risk → redirect to pass page
                 form.style.backgroundColor = "#d1f5e0";
                 formMessage!.innerText =
                     "This current mortgage request is approved ✅";
+                formMessage?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                });
             }
         })
         .catch((error) => {
